@@ -82,7 +82,8 @@ export class LoginPhase extends Phase {
 
     const hasSession = !!Utils.getCookie(Utils.sessionIdKey);
 
-    this.scene.ui.setMode(Mode.LOADING, { buttonActions: [] });
+    // this.scene.ui.setMode(Mode.LOADING, { buttonActions: [] });
+    console.log({bypassLogin})
     Utils.executeIf(bypassLogin || hasSession, updateUserInfo).then(response => {
       const success = response ? response[0] : false;
       const statusCode = response ? response[1] : null;
@@ -161,7 +162,8 @@ export class LoginPhase extends Phase {
       this.scene.unshiftPhase(new SelectGenderPhase(this.scene));
     }
 
-    handleTutorial(this.scene, Tutorial.Intro).then(() => super.end());
+    // handleTutorial(this.scene, Tutorial.Intro).then(() => super.end());
+    super.end();
   }
 }
 
@@ -503,30 +505,34 @@ export class SelectGenderPhase extends Phase {
   start(): void {
     super.start();
 
-    this.scene.ui.showText(i18next.t("menu:boyOrGirl"), null, () => {
-      this.scene.ui.setMode(Mode.OPTION_SELECT, {
-        options: [
-          {
-            label: i18next.t("settings:boy"),
-            handler: () => {
-              this.scene.gameData.gender = PlayerGender.MALE;
-              this.scene.gameData.saveSetting(SettingKeys.Player_Gender, 0);
-              this.scene.gameData.saveSystem().then(() => this.end());
-              return true;
-            }
-          },
-          {
-            label: i18next.t("settings:girl"),
-            handler: () => {
-              this.scene.gameData.gender = PlayerGender.FEMALE;
-              this.scene.gameData.saveSetting(SettingKeys.Player_Gender, 1);
-              this.scene.gameData.saveSystem().then(() => this.end());
-              return true;
-            }
-          }
-        ]
-      });
-    });
+    this.scene.gameData.gender = PlayerGender.MALE;
+    this.scene.gameData.saveSetting(SettingKeys.Player_Gender, 0);
+    this.scene.gameData.saveSystem().then(() => this.end());
+
+    // this.scene.ui.showText(i18next.t("menu:boyOrGirl"), null, () => {
+    //   this.scene.ui.setMode(Mode.OPTION_SELECT, {
+    //     options: [
+    //       {
+    //         label: i18next.t("settings:boy"),
+    //         handler: () => {
+    //           this.scene.gameData.gender = PlayerGender.MALE;
+    //           this.scene.gameData.saveSetting(SettingKeys.Player_Gender, 0);
+    //           this.scene.gameData.saveSystem().then(() => this.end());
+    //           return true;
+    //         }
+    //       },
+    //       {
+    //         label: i18next.t("settings:girl"),
+    //         handler: () => {
+    //           this.scene.gameData.gender = PlayerGender.FEMALE;
+    //           this.scene.gameData.saveSetting(SettingKeys.Player_Gender, 1);
+    //           this.scene.gameData.saveSystem().then(() => this.end());
+    //           return true;
+    //         }
+    //       }
+    //     ]
+    //   });
+    // });
   }
 
   end(): void {
@@ -901,7 +907,7 @@ export class EncounterPhase extends BattlePhase {
 
       if (!this.loaded) {
         regenerateModifierPoolThresholds(this.scene.getEnemyField(), battle.battleType === BattleType.TRAINER ? ModifierPoolType.TRAINER : ModifierPoolType.WILD);
-        this.scene.generateEnemyModifiers();
+        this.scene.generateEnemyModifiers(); v
       }
 
       this.scene.ui.setMode(Mode.MESSAGE).then(() => {
@@ -948,7 +954,7 @@ export class EncounterPhase extends BattlePhase {
       duration: 2000,
       onComplete: () => {
         if (!this.tryOverrideForBattleSpec()) {
-          this.doEncounterCommon();
+          this.doEncounterCommon();     
         }
       }
     });
@@ -966,8 +972,9 @@ export class EncounterPhase extends BattlePhase {
         return i18next.t("battle:trainerAppearedDouble", { trainerName: this.scene.currentBattle.trainer.getName(TrainerSlot.NONE, true) });
 
       } else {
-        return i18next.t("battle:trainerAppeared", { trainerName: this.scene.currentBattle.trainer.getName(TrainerSlot.NONE, true) });
-      }
+        return i18next.t("battle:trainerAppeared", { trainerName: this.scene.currentBattle.tra
+          [pl,m ijm,./lkkkk-[-'["/.iner.getName(TrainerSlot.NONE, true) });
+      }/.
     }
 
     return enemyField.length === 1

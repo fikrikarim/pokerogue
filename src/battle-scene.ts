@@ -67,7 +67,8 @@ import { Species } from "#enums/species";
 import { UiTheme } from "#enums/ui-theme";
 import { TimedEventManager } from "#app/timed-event-manager.js";
 
-export const bypassLogin = import.meta.env.VITE_BYPASS_LOGIN === "1";
+export const bypassLogin = true;
+
 
 const DEBUG_RNG = false;
 
@@ -115,7 +116,7 @@ export default class BattleScene extends SceneBase {
   public showTimeOfDayWidget: boolean = true;
   public timeOfDayAnimation: EaseType = EaseType.NONE;
   public showLevelUpStats: boolean = true;
-  public enableTutorials: boolean = import.meta.env.VITE_BYPASS_TUTORIAL === "1";
+  public enableTutorials: boolean = false;
   public enableMoveInfo: boolean = true;
   public enableRetries: boolean = false;
   /**

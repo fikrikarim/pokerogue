@@ -65,8 +65,8 @@ const tutorialHandlers = {
 
 export function handleTutorial(scene: BattleScene, tutorial: Tutorial): Promise<boolean> {
   return new Promise<boolean>(resolve => {
+    return resolve(false);
     if (!scene.enableTutorials) {
-      return resolve(false);
     }
 
     if (scene.gameData.getTutorialFlags()[tutorial]) {
